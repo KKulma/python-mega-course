@@ -44,4 +44,11 @@ def translate(word):
 json_path = "13-english-thesaurus/data.json"
 data = read_json(json_path)
 word = input("Enter word: ")
-print(translate(word))
+
+outcome = translate(word)
+
+if type(outcome) == list:
+    for item in outcome:
+        print(item)
+else:
+    print(outcome)
