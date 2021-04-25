@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 pandas = "*"
 opencv-python = "*"
+folium = "*"
+pathlib = "*"
+mysql-connector-python = "*"
+geopy = "*"
 
 [dev-packages]
 
