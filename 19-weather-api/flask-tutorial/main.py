@@ -10,4 +10,5 @@ def home():
 def about():
     return render_template("about.html")
 
-app.run(debug=True)
+# make sure that if multiple apps are running simultanously then don't use the same port
+app.run(debug=True, port=5001)
