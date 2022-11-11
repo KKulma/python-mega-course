@@ -1,11 +1,17 @@
 from flask import Flask, render_template
 import pandas as pd
 
+port = 5000
+
 app = Flask(__name__)
+stations = pd.read_csv('data_small/stations.txt', skiprows=17)[['STAID','STANAME                                 ']]
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html",
+                           stations_tbl=stations.to_html(index=False),
+                           port=port
+                           )
 
 @app.route("/api/v1/<station>/<date>")
 def api(station, date):
@@ -22,4 +28,4 @@ def api(station, date):
 
 # make sure that the app is run only if the main.py is executed directly and not imported by other scripts
 if __name__ == "__main__":
-    app.run(debug=True, port=5000) # make sure that if multiple apps are running simultanously then don't use the same port
+    app.run(debug=True, port=port) # make sure that if multiple apps are running simultanously then don't use the same port
