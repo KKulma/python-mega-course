@@ -14,7 +14,7 @@ def home():
                            )
 
 @app.route("/api/v1/<station>/<date>")
-def api(station, date):
+def station_date(station, date):
     filename = f'data_small/TG_STAID{str(station).zfill(6)}.txt'
     df = pd.read_csv(filename, skiprows=20, parse_dates=['    DATE'])
     temperature = df[df['    DATE'] == date]['   TG'].squeeze()/10
@@ -24,6 +24,27 @@ def api(station, date):
         "station": station,
         "date": date,
         "temperature": temperature
+    }
+
+@app.route("/api/v1/<station>")
+def station(station):
+    filename = f'data_small/TG_STAID{str(station).zfill(6)}.txt'
+    df = pd.read_csv(filename, skiprows=20, parse_dates=['    DATE'])
+
+    return {
+        "station": station,
+        "data": df.to_dict(orient='records')
+    }
+
+@app.route("/api/v1/year/<station>/<year>")
+def station_year(station, year):
+    filename = f'data_small/TG_STAID{str(station).zfill(6)}.txt'
+    df = pd.read_csv(filename, skiprows=20)
+    df = df[df['    DATE'].astype(str).str.startswith(year)]
+
+    return {
+        "station": station,
+        "data": df.to_dict(orient='records')
     }
 
 # make sure that the app is run only if the main.py is executed directly and not imported by other scripts

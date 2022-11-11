@@ -6,8 +6,19 @@
 </head>
 <body>
     <h1>Weather Data API</h1>
+    <h3>Specific date</h3>
     <p>URL format: http://127.0.0.1:{{port}}/api/v1/station/date</p>
     <p>URL example: http://127.0.0.1:{{port}}/api/v1/10/1988-10-25</p>
+    <br>
+    <h3>All dates</h3>
+    <p>URL format: http://127.0.0.1:{{port}}/api/v1/station</p>
+    <p>URL example: http://127.0.0.1:{{port}}/api/v1/10</p>
+    <br>
+    <h3>Specific year</h3>
+    <p>URL format: http://127.0.0.1:{{port}}/api/v1/year/station/year</p>
+    <p>URL example: http://127.0.0.1:{{port}}/api/v1/year/10/1999</p>
+    <br>
+    <h3>List of all stations</h3>
     <p>{{stations_tbl|safe}}</p>
 </body>
 </html>
